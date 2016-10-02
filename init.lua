@@ -137,12 +137,12 @@ minetest.register_on_dieplayer(function(player)
     minetest.register_on_chat_message(function(name,message)
       print (name)
       print (dead_name)
-      if message == "no"  or message == "No" then
+      if message == "no" or message == "No" or message == "NO" then
          if question == 1 and dead_name == name then
          minetest.chat_send_player(name, "<The All Seeing Eye> Ok.")
          question = 0
          end
-      elseif message == "yes" or message == "Yes" then
+      elseif message == "yes" or message == "Yes" or message == "YES" then
          if question == 1 and dead_name == name  then
          local playername = player:get_player_name(player)
          local pos = server_helper.players[name].location
@@ -167,10 +167,10 @@ local myname = "The All Seeing Eye"
 local myname2 = "the all seeing eye"
 minetest.register_on_chat_message(function(name,message)
   if string.match(message, myname) then
-    minetest.chat_send_all("<The All Seeing Eye> What do you need?")
+    minetest.chat_send_all("<The All Seeing Eye> What do you need "..name.."?")
   end
   if string.match(message, myname2) then
-    minetest.chat_send_all("<The All Seeing Eye> What do you need?")
+    minetest.chat_send_all("<The All Seeing Eye> What do you need "..name.."?")
   end
 end)
 
