@@ -181,20 +181,26 @@ minetest.register_on_chat_message(function(name,message)
   end
 end)
 
+minetest.register_on_joinplayer(function(player)
+	local name = player:get_player_name()
+   server_helper.players[name] = {shout = 0,}
+end)
+
 minetest.register_on_chat_message(function(name, message)
   if minetest.setting_getbool("language_control") == true then
-    if string.match(message, "fuck") or string.match(message, "Fuck") or string.match(message, "Shit") or
-    string.match(message, "shit") or string.match(message, "ass") or string.match(message, "Ass") or
-    string.match(message, "bitch") or string.match(message, "Bitch") or string.match(message, "Cunt") or
-    string.match(message, "cunt") or string.match(message, "Dick") or string.match(message, "dick") or
-    string.match(message, "Fucker") or string.match(message, "fucker") or string.match(message, "damn") or
-    string.match(message, "Damn") then
-      local a = server_helper.players[name].shout
-      a = a + 1
-      server_helper.players[name] = {shout = a,}
-      if a < 5 then
+    if string.match(message, "Fuck") or string.match(message, "fUck") or string.match(message, "fuCk") or string.match(message, "fucK") or string.match(message, "fuck") or string.match(message, "FUCK") or
+      string.match(message, "Shit") or string.match(message, "sHit") or string.match(message, "shIt") or string.match(message, "shiT") or string.match(message, "shit") or string.match(message, "SHIT") or
+      string.match(message, "Bitch") or string.match(message, "bItch") or string.match(message, "biTch") or string.match(message, "bitCh") or string.match(message, "bitcH") or string.match(message, "bitch") or string.match(message, "BITCH") or
+      string.match(message, "Cunt") or string.match(message, "cUnt") or string.match(message, "cuNt") or string.match(message, "cunT") or string.match(message, "cunt") or string.match(message, "CUNT") or
+      string.match(message, "Nigger") or string.match(message, "nIgger") or string.match(message, "niGger") or string.match(message, "nigGer") or string.match(message, "niggEr") or string.match(message, "niggeR") or string.match(message, "nigger") or string.match(message, "NIGGER") or
+      string.match(message, "Fucker") or string.match(message, "fUcker") or string.match(message, "fuCker") or string.match(message, "fucKer") or string.match(message, "fuckEr") or string.match(message, "fuckeR") or string.match(message, "fucker") or string.match(message, "FUCKER") or
+      string.match(message, "Damn") then
+      local l = server_helper.players[name].shout
+      l = l + 1
+      server_helper.players[name] = {shout = l,}
+      if l < 5 then
         minetest.chat_send_all("<The All Seeing Eye> Please do not use foul language.")
-      elseif a >= 5 then
+      elseif l >= 5 then
         minetest.kick_player(name, "You didn't stop using foul language!")
         minetest.chat_send_all(name .. " was just kicked for not following the rules.")
       end
